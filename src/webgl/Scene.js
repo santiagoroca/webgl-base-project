@@ -8,17 +8,17 @@ const X = 0, Y = 1, Z = 2;
 class Scene {
     
     constructor (gl) {
-        this.geometries = new Map(); // Map<Material, Array<Geometry>>
+        this.geometriesByMaterial = new Map(); // Map<Material, Array<Geometry>>
         this.materials = buildMaterials(gl);
         this.camera = new Camera();
 
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 100; i++) {
             const color = [ Math.random(), Math.random(), Math.random(), 1 ];
 
             const xyz = glMatrix.vec3.fromValues(
                 Math.random() * 80 - 40,
                 Math.random() * 40 - 20,
-                Math.random() * -30,
+                Math.random() * -60 + 30,
             );
 
             this.addGeometry(new VertexArrayGeometry([
@@ -30,17 +30,17 @@ class Scene {
     }
 
     addGeometry (geometry) {
-        if (!this.geometries.has(geometry.material)) {
-            this.geometries.set(geometry.material, []);
+        if (!this.geometriesByMaterial.has(geometry.material)) {
+            this.geometriesByMaterial.set(geometry.material, []);
         }
 
-        this.geometries
+        this.geometriesByMaterial
             .get(geometry.material)
             .push(geometry);
     }
 
     render (gl) {
-        for (const [ material, geometries ] of this.geometries.entries()) {
+        for (const [ material, geometries ] of this.geometriesByMaterial.entries()) {
 
             for (const geometry of geometries) {
                 this.materials[material].render(gl, geometry, this.camera);
@@ -50,6 +50,12 @@ class Scene {
 
     dispose () {
         // TODO Dispose
+    }
+
+    get geometries () {
+        return [ ...this.geometriesByMaterial.entries() ].reduce(
+            (geometries, [ _, materialGeometries ]) => [ ...geometries, ...materialGeometries ], []
+        );
     }
 
 }

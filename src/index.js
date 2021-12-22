@@ -4,6 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * Interesting stuff to do:
+ *
+ * - Add zoom with the scroll wheel 
+ * - Add Panning movement
+ * - Merge Geometries into a single buffer
+ * - Turn them into boxes
+ * - Add a basic light source
+ *
+ * - Add a transformation matrix to each VertexArrayGeometry and also
+ *    - Make them move
+ *    - Change color dinamically
+ *    - Change size
+ * 
+ * - Implement color picking
+ *
+ */
 ReactDOM.render(
   <React.StrictMode>
     <App />

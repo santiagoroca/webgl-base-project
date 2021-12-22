@@ -5,3 +5,5 @@ class Vector3 extends Array {
     get z () { return this[2] }
 
 }
+
+export default Vector3;

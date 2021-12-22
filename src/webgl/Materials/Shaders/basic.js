@@ -1,7 +1,6 @@
 const VERTEX = `
 
-    uniform mat4 u_projection;
-    uniform mat4 u_transformation;
+    uniform mat4 u_world_view_projection;
     uniform vec4 u_color;
 
     attribute vec4 a_position;
@@ -13,7 +12,7 @@ const VERTEX = `
         // Pass all uniforms
         v_color = u_color;
 
-        gl_Position = u_projection * u_transformation * a_position;
+        gl_Position = u_world_view_projection * a_position;
     }
 
 `;

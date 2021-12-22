@@ -1,4 +1,12 @@
 import Scene from './Scene';
+import MouseInteraction from './Controls/MouseInteraction'
+import { glMatrix } from 'gl-matrix';
+
+/**
+ * Asks gl-matrix to use normal arrays
+ * to slghtly improve performance
+ */
+glMatrix.setMatrixArrayType(Array);
 
 /**
  * 
@@ -42,6 +50,8 @@ class Viewer {
         );
 
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+        this.gl.enable(this.gl.DEPTH_TEST);
+        this.gl.depthFunc(this.gl.LESS);
     }
 
     /**
@@ -49,6 +59,7 @@ class Viewer {
      */
     initialize () {
         this.scene = new Scene(this.gl);
+        this.mouseInteraction = new MouseInteraction(this);
         this.render();
     }
 

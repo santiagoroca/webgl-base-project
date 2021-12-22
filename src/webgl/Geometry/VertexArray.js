@@ -1,7 +1,13 @@
 import { BASIC_MATERIAL } from '../Materials/BasicMaterial';
 
+export const GEOMETRY_TYPE = {
+    TRIANGLES: 0x0004,
+    LINES: 0x0001
+}
+
 const DEFAULT_OPTIONS = {
-    color: [1, 1, 1, 1]
+    color: [1, 1, 1, 1],
+    geometryType: GEOMETRY_TYPE.TRIANGLES
 }
 
 class Geometry {
@@ -15,6 +21,7 @@ class Geometry {
         };
 
         this.color = options.color;
+        this.geometryType = options.geometryType;
     }
 
     dispose () {
